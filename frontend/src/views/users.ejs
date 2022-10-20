@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        table {
+            border-left: 1px solid #ebeef5;
+            border-top: 1px solid #ebeef5;
+            margin-top: 40px;
+        }
+
+        table td,
+        th {
+            border-bottom: 1px solid #ebeef5;
+            border-right: 1px solid #ebeef5;
+        }
+
+        .delBtn {
+            cursor: pointer;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .nav {
+            padding-top: 10px;
+        }
+
+        .adduer {
+            margin-left: 20px;
+        }
+
+        .loginout {
+            float: right;
+            margin-right: 100px;
+        }
+
+        .adduermodel {
+            display: flex;
+            flex-direction: column;
+            width: 350px;
+            border: 1px solid;
+            position: absolute;
+            background: white;
+            left: 50%;
+            transform: translate(-50%);
+            display: none;
+        }
+
+        .adduermodel h3 {
+            text-align: center;
+        }
+
+        .adduermodel div {
+            margin: 10px;
+        }
+
+        .inputstyle {
+            -webkit-appearance: none;
+            background-color: #fff;
+            background-image: none;
+            border-radius: 4px;
+            border: 1px solid #dcdfe6;
+            box-sizing: border-box;
+            color: #606266;
+            display: inline-block;
+            font-size: inherit;
+            height: 40px;
+            line-height: 40px;
+            outline: none;
+            padding: 0 15px;
+        }
+
+        .fileinput-button {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            background: #409eff;
+            padding: 9px 15px;
+            font-size: 12px;
+            border-radius: 3px;
+            color: white;
+        }
+
+        .fileinput-button input {
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            opacity: 0;
+            font-size: 50px;
+        }
+
+        .btn {
+            background-color: #409eff;
+            color: white;
+            display: inline-block;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            border: 1px solid #dcdfe6;
+            -webkit-appearance: none;
+            text-align: center;
+            box-sizing: border-box;
+            outline: none;
+            margin: 0;
+            transition: .1s;
+            font-weight: 500;
+            padding: 12px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+
+        .closebtn {
+            margin-right: 10px;
+            float: right;
+            cursor: pointer;
+        }
+
+        .mask {
+            width: 100vw;
+            height: 100vh;
+            background-color: rgb(62, 62, 62, .8);
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            display: none;
+        }
+
+        table {
+            width: 800px;
+            text-align: center;
+        }
+
+        .imgshow {
+            width: 100px;
+            height: 100px;
+            border: 1px solid;
+            left: 200px;
+            top: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <button class="adduer">添加用户</button>
+        <button class="loginout">退出登录</button>
+    </div>
+    <div class="mask"></div>
+    <div class="adduermodel">
+        <div><span class="closebtn">X</span></div>
+        <h3>添加用户</h3>
+        <div>用户名 &nbsp; ： <input class="inputstyle username" type="text" /></div>
+        <div>密 &nbsp;&nbsp; 码 ：&nbsp;&nbsp;<input class="inputstyle pwd" type="password" /></div>
+        <div>确认密码 ：<input class="inputstyle repeatpwd" type="password" /></div>
+        <div class="uploadContainer">缩略图：<span class="fileinput-button">
+                <span>上传图片</span>
+                <input class="imgFile" type="file" name="" />
+            </span>
+            <div class="imgshow">
+                <!-- <img width="100%" height="100%" src="./img/img.png" alt=""> -->
+            </div>
+        </div>
+        <div>
+            <button class="btn" type="submit">提交</button>
+        </div>
+    </div>
+    <div>
+        <table border="0">
+            <tr>
+                <th>用户名</th>
+                <th>创建时间</th>
+                <th>图像</th>
+                <th>操作</th>
+            </tr>
+            <%data.users.forEach(item=> {%>
+                <tr>
+                    <td>
+                        <%=item.username %>
+                    </td>
+                    <td>
+                        <%=item.time %>
+                    </td>
+                    <td><img width="140px" height='100px' src="<%=data.baseURL %>/<%=item.imgs %>  " /></td>
+                    <td><span class="delBtn" ids="<%=item._id %>">删除</span></td>
+                </tr>
+                <% }); %>
+        </table>
+
+        <div class="pagings">
+            <%for(let i=1; i<=data.pageshow; i++){%>
+                <a href="#"><%=i %></a>
+                <% } %>
+
+        </div>
+    </div>
+</body>
+
+</html>
